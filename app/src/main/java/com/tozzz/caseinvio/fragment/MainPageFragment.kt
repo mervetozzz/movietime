@@ -18,17 +18,18 @@ class MainPageFragment : Fragment(), SearchView.OnQueryTextListener {
     private lateinit var adapter: MovieAdapter
     private lateinit var viewModel: MainPageFragmentViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main_page, container, false)
         binding.mainPageFragment = this
         binding.mainPageToolbar = "Movies"
 
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbarMain)
 
-//Dinleme işlemi
+        //Dinleme işlemi
         viewModel.movieList.observe(viewLifecycleOwner) {
             adapter = MovieAdapter(requireContext())
             binding.movieAdapter = adapter
+           // adapter.notifyDataSetChanged()
         }
         return binding.root
     }
@@ -59,7 +60,6 @@ class MainPageFragment : Fragment(), SearchView.OnQueryTextListener {
 
     override fun onQueryTextSubmit(query: String): Boolean {
             viewModel.search(query)
-
         return true
     }
 

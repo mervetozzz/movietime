@@ -22,11 +22,6 @@ class MovieAdapter(var mContext: Context) : RecyclerView.Adapter<MovieAdapter.Ca
         }
     }
 
-    fun setMovieList(list: List<SearchX>) {
-        this.movieDetailsList = list
-        notifyDataSetChanged()
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardDesign {
         val layoutInflater = LayoutInflater.from(mContext)
         val binding = CardDesignBinding.inflate(layoutInflater, parent, false)
@@ -34,7 +29,7 @@ class MovieAdapter(var mContext: Context) : RecyclerView.Adapter<MovieAdapter.Ca
     }
 
     override fun onBindViewHolder(holder: CardDesign, position: Int) {
-        val search = movieDetailsList.get(position)
+        val search = movieDetailsList[position]
         val t = holder.binding
         t.movieObj = search
         Picasso.get().load(movieDetailsList[position].poster).into(t.ivPoster)
